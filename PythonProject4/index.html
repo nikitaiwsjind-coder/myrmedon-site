@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYRMEDON — Головна</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&amp;family=Rajdhani:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 85vh;
+            padding: 50px 0;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1 1 45%;
+            max-width: 600px;
+        }
+
+        .hero-text .tag {
+            font-size: 12px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 600;
+            border: 1px solid var(--border);
+            display: inline-block;
+            padding: 4px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 58px;
+            font-weight: 900;
+            line-height: 1.08;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero-text h1 .highlight {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 6px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .hero-text .stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .hero-text .stats .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .hero-text .stats .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-logo {
+            flex: 1 1 40%;
+            max-width: 450px;
+            text-align: center;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 50px 40px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-logo .big-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: var(--text);
+            line-height: 1.05;
+        }
+
+        .hero-logo .big-brand .primary {
+            color: var(--primary);
+        }
+
+        .hero-logo .divider {
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+            margin: 14px auto;
+        }
+
+        .hero-logo .big-sub {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .hero-logo .big-sub .primary {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .hero-logo .badge {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            margin-top: 14px;
+        }
+
+        .hero-logo .badge .primary {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 38px;
+            }
+            .hero-logo .big-brand {
+                font-size: 40px;
+                letter-spacing: 4px;
+            }
+            .hero-logo .big-sub {
+                font-size: 14px;
+                letter-spacing: 8px;
+            }
+            .hero-text .stats {
+                gap: 20px;
+            }
+            .hero-text .stats .stat-number {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 30px;
+            }
+            .hero-logo {
+                padding: 30px 20px;
+            }
+            .hero-logo .big-brand {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="brand">MYR<span class="primary">MEDON</span></div>
+                <div class="sub"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="index.html" class="active"><i class="fas fa-home"></i> Головна</a>
+                <a href="catalog.html"><i class="fas fa-store"></i> Каталог</a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> Про нас</a>
+                <a href="reviews.html"><i class="fas fa-star"></i> Відгуки</a>
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i> Кошик
+                    <span class="cart-count">0</span>
+                </a>
+                <a href="login.html"><i class="fas fa-user"></i> Вхід</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container" style="display: flex; align-items: center; justify-content: center; gap: 60px; flex-wrap: wrap;">
+            <div class="hero-text">
+                <div class="tag">✦ Запуск 2026 ✦</div>
+                <h1>
+                    Мурахи <br>
+                    <span class="highlight">з характером</span>
+                </h1>
+                <p>
+                    MYRMEDON INSPIRES — елітний магазин мурах, формікаріїв та аксесуарів.
+                    Живі колонії, рідкісні види та повний супровід від «яйця» до армії.
+                    Ми допомагаємо створити ідеальні умови для ваших улюбленців.
+                </p>
+                <div class="btn-group">
+                    <a href="catalog.html" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Перейти в магазин</a>
+                    <a href="about.html" class="btn btn-outline"><i class="fas fa-info-circle"></i> Про нас</a>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Відгуків</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">⭐ Рейтинг</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Видів мурах</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-logo">
+                <div class="big-brand">MYR<span class="primary">MEDON</span></div>
+                <div class="divider"></div>
+                <div class="big-sub"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+                <div class="badge"><span class="primary">⚔</span> воїни природи <span class="primary">⚔</span></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer container">
+        <div>
+            <div class="brand-small">MYR<span class="primary">MEDON</span></div>
+            <div class="sub-small"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            <p style="margin-top: 6px;">© 2026 Всі права захищено</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Головна</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="about.html">Про нас</a>
+            <a href="reviews.html">Відгуки</a>
+            <a href="privacy.html">Політика конфіденційності</a>
+            <a href="#">Доставка</a>
+            <a href="#">Контакти</a>
+        </div>
+        <div class="socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYRMEDON — Каталог</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&amp;family=Rajdhani:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            text-align: center;
+            padding: 40px 0 10px;
+            color: var(--text);
+        }
+        .page-title span {
+            color: var(--primary);
+        }
+
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px 0 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .catalog-header .result-count {
+            color: var(--text-muted);
+            font-weight: 300;
+            font-size: 14px;
+        }
+
+        .catalog-header .result-count strong {
+            color: var(--text);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-bar select {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .filter-bar select:focus {
+            border-color: var(--primary);
+        }
+
+        .filter-bar select option {
+            background: var(--bg);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 25px;
+            padding: 30px 0 50px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px 18px 20px;
+            border: 1px solid var(--border);
+            transition: 0.4s;
+            text-align: center;
+            position: relative;
+        }
+
+        .product-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-card .emoji {
+            font-size: 44px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .product-card .badge-sale {
+            background: rgba(44, 62, 80, 0.08);
+            color: var(--primary);
+            padding: 2px 14px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 4px;
+            border: 1px solid rgba(44, 62, 80, 0.08);
+        }
+
+        .product-card .badge-new {
+            background: rgba(46, 204, 113, 0.12);
+            color: #27ae60;
+            padding: 2px 14px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 4px;
+            border: 1px solid rgba(46, 204, 113, 0.15);
+        }
+
+        .product-card h4 {
+            font-size: 17px;
+            font-family: 'Playfair Display', serif;
+            color: var(--text);
+            margin: 6px 0 2px;
+        }
+
+        .product-card .desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 10px;
+            min-height: 36px;
+        }
+
+        .product-card .price {
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .product-card .price .old {
+            color: var(--text-muted);
+            font-size: 15px;
+            text-decoration: line-through;
+            font-weight: 300;
+            margin-right: 6px;
+        }
+
+        .product-card .btn-group-card {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-small {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-small:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-small-cart {
+            background: var(--primary);
+            border: 1px solid var(--primary);
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-small-cart:hover {
+            background: var(--primary-light);
+            border-color: var(--primary-light);
+            transform: scale(1.02);
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 0 50px;
+            flex-wrap: wrap;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 10px 18px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .pagination a.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .pagination a.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .pagination a.disabled:hover {
+            border-color: var(--border);
+            color: var(--text-muted);
+        }
+
+        /* ===== CATEGORIES FILTER ===== */
+        .category-filter {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 10px 0 20px;
+            justify-content: center;
+        }
+
+        .category-filter a {
+            padding: 8px 24px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .category-filter a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .category-filter a.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 30px;
+            }
+
+            .catalog-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .product-card {
+                padding: 18px 12px 16px;
+            }
+
+            .product-card h4 {
+                font-size: 15px;
+            }
+
+            .product-card .price {
+                font-size: 18px;
+            }
+
+            .btn-small,
+            .btn-small-cart {
+                font-size: 10px;
+                padding: 6px 14px;
+            }
+
+            .category-filter a {
+                font-size: 11px;
+                padding: 6px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .filter-bar select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="brand">MYR<span class="primary">MEDON</span></div>
+                <div class="sub"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            </a>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Головна</a>
+                <a href="catalog.html" class="active"><i class="fas fa-store"></i> Каталог</a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> Про нас</a>
+                <a href="reviews.html"><i class="fas fa-star"></i> Відгуки</a>
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i> Кошик
+                    <span class="cart-count">0</span>
+                </a>
+                <a href="login.html"><i class="fas fa-user"></i> Вхід</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="container">
+
+        <h1 class="page-title">Каталог <span>мурах</span></h1>
+        <p style="text-align: center; color: var(--text-muted); font-weight: 300; margin-bottom: 10px; font-size: 17px;">
+            Живі сім'ї для колекціонерів та хобі-ентузіастів
+        </p>
+
+        <!-- ===== CATEGORY FILTER ===== -->
+        <div class="category-filter">
+            <a href="#" class="active">Всі</a>
+            <a href="#">Мурахи</a>
+            <a href="#">Формікарії</a>
+            <a href="#">Арени</a>
+            <a href="#">Інкубатори</a>
+            <a href="#">Корм</a>
+            <a href="#">Модулі</a>
+        </div>
+
+        <!-- ===== SORT & FILTER ===== -->
+        <div class="catalog-header">
+            <span class="result-count">Відображаються усі з <strong>6</strong> результатів</span>
+            <div class="filter-bar">
+                <select>
+                    <option>Сортувати за популярністю</option>
+                    <option>Від дешевих до дорогих</option>
+                    <option>Від дорогих до дешевих</option>
+                    <option>За назвою (А-Я)</option>
+                </select>
+                <select>
+                    <option>Всі категорії</option>
+                    <option>Мурахи</option>
+                    <option>Формікарії</option>
+                    <option>Арени</option>
+                    <option>Інкубатори</option>
+                    <option>Корм</option>
+                    <option>Модулі</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ===== PRODUCTS GRID ===== -->
+        <div class="products-grid">
+
+            <!-- Товар 1 -->
+            <div class="product-card">
+                <span class="emoji">🐜</span>
+                <h4>Camponotus japonicus</h4>
+                <div class="desc">Велика чорна мураха. Спокійна, швидкий ріст.</div>
+                <div class="price">299 ₴ – 559 ₴</div>
+                <div class="btn-group-card">
+                    <a href="product.html?id=1" class="btn-small">Детальніше</a>
+                    <button class="btn-small-cart" onclick="addToCart('1')"><i class="fas fa-cart-plus"></i> В кошик</button>
+                </div>
+            </div>
+
+            <!-- Товар 2 -->
+            <div class="product-card">
+                <span class="emoji">🐜</span>
+                <h4>Camponotus pseudoirritans</h4>
+                <div class="desc">Ефектний вигляд з червоним черевцем.</div>
+                <div class="price">699 ₴ – 899 ₴</div>
+                <div class="btn-group-card">
+                    <a href="product.html?id=2" class="btn-small">Детальніше</a>
+                    <button class="btn-small-cart" onclick="addToCart('2')"><i class="fas fa-cart-plus"></i> В кошик</button>
+                </div>
+            </div>
+
+            <!-- Товар 3 - Розпродаж -->
+            <div class="product-card">
+                <span class="badge-sale">🔥 РОЗПРОДАЖ</span>
+                <span class="emoji">🐜</span>
+                <h4>Ectomomyrmex zhengii</h4>
+                <div class="desc">Агресивні мисливці. Рідкісний вид.</div>
+                <div class="price"><span class="old">1 490 ₴</span> 1 129 ₴</div>
+                <div class="btn-group-card">
+                    <a href="product.html?id=3" class="btn-small">Детальніше</a>
+                    <button class="btn-small-cart" onclick="addToCart('3')"><i class="fas fa-cart-plus"></i> В кошик</button>
+                </div>
+            </div>
+
+            <!-- Товар 4 -->
+            <div class="product-card">
+                <span class="emoji">🐜</span>
+                <h4>Messor structor</h4>
+                <div class="desc">Ідеальні для початківців. Жниварі.</div>
+                <div class="price">490 ₴</div>
+                <div class="btn-group-card">
+                    <a href="product.html?id=4" class="btn-small">Детальніше</a>
+                    <button class="btn-small-cart" onclick="addToCart('4')"><i class="fas fa-cart-plus"></i> В кошик</button>
+                </div>
+            </div>
+
+            <!-- Товар 5 -->
+            <div class="product-card">
+                <span class="emoji">🐜</span>
+                <h4>Camponotus vagus</h4>
+                <div class="desc">Чорні лісові велетні. Потужна колонія.</div>
+                <div class="price">890 ₴</div>
+                <div class="btn-group-card">
+                    <a href="product.html?id=5" class="btn-small">Детальніше</a>
+                    <button class="btn-small-cart" onclick="addToCart('5')"><i class="fas fa-cart-plus"></i> В кошик</button>
+                </div>
+            </div>
+
+            <!-- Товар 6 - Новинка -->
+            <div class="product-card">
+                <span class="badge-new">⭐ НОВИНКА</span>
+                <span class="emoji">🐜</span>
+                <h4>Atta cephalotes</h4>
+                <div class="desc">Мурахи-листорізи. Екзотика для просунутих.</div>
+                <div class="price">2 990 ₴</div>
+                <div class="btn-group-card">
+                    <a href="product.html?id=6" class="btn-small">Детальніше</a>
+                    <button class="btn-small-cart" onclick="addToCart('6')"><i class="fas fa-cart-plus"></i> В кошик</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== PAGINATION ===== -->
+        <div class="pagination">
+            <a href="#" class="disabled"><i class="fas fa-chevron-left"></i></a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#"><i class="fas fa-ellipsis-h"></i></a>
+            <a href="#">5</a>
+            <a href="#"><i class="fas fa-chevron-right"></i></a>
+        </div>
+
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer container">
+        <div>
+            <div class="brand-small">MYR<span class="primary">MEDON</span></div>
+            <div class="sub-small"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            <p style="margin-top: 6px;">© 2026 Всі права захищено</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Головна</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="about.html">Про нас</a>
+            <a href="reviews.html">Відгуки</a>
+            <a href="privacy.html">Політика конфіденційності</a>
+            <a href="#">Доставка</a>
+            <a href="#">Контакти</a>
+        </div>
+        <div class="socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

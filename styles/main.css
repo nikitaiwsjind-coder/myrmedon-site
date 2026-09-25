@@ -1,0 +1,352 @@
+/* ========================================
+   RESET & BASE
+======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #2c3e50;
+    --primary-light: #4a6a85;
+    --primary-dark: #1a2a3a;
+    --bg: #ffffff;
+    --bg-card: #f5f7f8;
+    --border: #e0e4e8;
+    --text: #1a1a2e;
+    --text-muted: #6c7a8a;
+    --text-light: #4a5a6a;
+    --radius: 20px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.04);
+    --shadow-hover: 0 8px 40px rgba(0,0,0,0.08);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+.header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logo .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--text);
+    line-height: 1;
+}
+
+.logo .brand .primary {
+    color: var(--primary);
+}
+
+.logo .sub {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 2px;
+    border-top: 1px solid var(--border);
+    padding-top: 3px;
+}
+
+.logo .sub .primary {
+    color: var(--primary);
+}
+
+/* ---- NAV ---- */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 8px 18px;
+    font-weight: 400;
+    transition: 0.3s;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 50px;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: var(--primary);
+    background: rgba(44, 62, 80, 0.06);
+}
+
+.nav a i {
+    margin-right: 6px;
+}
+
+.nav .cart-btn {
+    position: relative;
+}
+
+.nav .cart-count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+.btn {
+    padding: 14px 38px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(44, 62, 80, 0.15);
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(44, 62, 80, 0.25);
+}
+
+.btn-outline {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: rgba(44, 62, 80, 0.06);
+    transform: translateY(-3px);
+}
+
+.btn-small {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-small:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+.footer {
+    margin-top: auto;
+    padding: 40px 0 30px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.footer .brand-small {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.footer .brand-small .primary {
+    color: var(--primary);
+}
+
+.footer .sub-small {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.footer .sub-small .primary {
+    color: var(--primary);
+}
+
+.footer .footer-links {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.footer .footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer .footer-links a:hover {
+    color: var(--primary);
+}
+
+.footer .socials {
+    display: flex;
+    gap: 16px;
+}
+
+.footer .socials a {
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.footer .socials a:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .logo .brand {
+        font-size: 26px;
+        letter-spacing: 3px;
+    }
+
+    .mobile-toggle {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+    }
+
+    .nav.open {
+        display: flex;
+    }
+
+    .nav a {
+        text-align: center;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer .socials {
+        justify-content: center;
+    }
+
+    .footer .footer-links {
+        justify-content: center;
+    }
+}

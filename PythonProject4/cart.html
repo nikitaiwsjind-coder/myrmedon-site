@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYRMEDON — Кошик</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&amp;family=Rajdhani:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            text-align: center;
+            padding: 40px 0 10px;
+            color: var(--text);
+        }
+        .page-title span {
+            color: var(--primary);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .cart-empty .icon {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        .cart-empty h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        .cart-empty p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 24px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .cart-item .item-info {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .cart-item .item-info .emoji {
+            font-size: 32px;
+        }
+        .cart-item .item-info .name {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text);
+        }
+        .cart-item .item-info .name small {
+            display: block;
+            font-weight: 300;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .cart-item .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .cart-item .item-actions .qty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cart-item .item-actions .qty button {
+            background: var(--border);
+            border: none;
+            color: var(--text);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .cart-item .item-actions .qty button:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+        .cart-item .item-actions .qty span {
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+            color: var(--text);
+        }
+        .cart-item .item-actions .price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 20px;
+            min-width: 80px;
+            text-align: right;
+        }
+        .cart-item .item-actions .remove {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .cart-item .item-actions .remove:hover {
+            color: #e74c3c;
+        }
+
+        .cart-total {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .cart-total .total-label {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text);
+        }
+        .cart-total .total-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 30px;
+            }
+            .cart-item {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .cart-item .item-info {
+                justify-content: center;
+            }
+            .cart-item .item-actions {
+                justify-content: center;
+            }
+            .cart-total {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="brand">MYR<span class="primary">MEDON</span></div>
+                <div class="sub"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+            <nav class="nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Головна</a>
+                <a href="catalog.html"><i class="fas fa-store"></i> Каталог</a>
+                <a href="cart.html" class="active cart-btn">
+                    <i class="fas fa-shopping-cart"></i> Кошик
+                    <span class="cart-count">0</span>
+                </a>
+                <a href="login.html"><i class="fas fa-user"></i> Вхід</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container" id="cartPage">
+        <h1 class="page-title">Мій <span>кошик</span></h1>
+
+        <div class="cart-empty" id="cartEmpty">
+            <span class="icon">🛒</span>
+            <h2>Кошик порожній</h2>
+            <p>Додайте товари з каталогу, щоб зробити замовлення</p>
+            <a href="catalog.html" class="btn btn-primary">Перейти в каталог</a>
+        </div>
+
+        <div id="cartFull" style="display: none;">
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-total">
+                <span class="total-label">Загальна сума:</span>
+                <span class="total-price" id="cartTotalPrice">0 ₴</span>
+            </div>
+            <div style="text-align: right; margin: 25px 0 60px;">
+                <button class="btn btn-primary" onclick="checkout()"><i class="fas fa-check"></i> Оформити замовлення</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer container">
+        <div>
+            <div class="brand-small">MYR<span class="primary">MEDON</span></div>
+            <div class="sub-small"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            <p style="margin-top: 6px;">© 2026 Всі права захищено</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Головна</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="#">Про нас</a>
+            <a href="#">Доставка</a>
+            <a href="#">Контакти</a>
+        </div>
+        <div class="socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('open');
+        });
+
+        // Функции корзины
+        function getCart() {
+            try {
+                var cart = localStorage.getItem('myrmedon_cart');
+                return cart ? JSON.parse(cart) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('myrmedon_cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function updateCartCount() {
+            var cart = getCart();
+            var count = 0;
+            for (var i = 0; i < cart.length; i++) {
+                count = count + cart[i].quantity;
+            }
+            var elements = document.querySelectorAll('.cart-count');
+            for (var j = 0; j < elements.length; j++) {
+                elements[j].textContent = count;
+            }
+        }
+
+        function renderCart() {
+            var cart = getCart();
+            var emptyEl = document.getElementById('cartEmpty');
+            var fullEl = document.getElementById('cartFull');
+            var itemsEl = document.getElementById('cartItems');
+
+            if (cart.length === 0) {
+                emptyEl.style.display = 'block';
+                fullEl.style.display = 'none';
+                return;
+            }
+
+            emptyEl.style.display = 'none';
+            fullEl.style.display = 'block';
+
+            itemsEl.innerHTML = '';
+            var total = 0;
+
+            for (var i = 0; i < cart.length; i++) {
+                var item = cart[i];
+                var price = parseFloat(item.price);
+                var itemTotal = price * item.quantity;
+                total = total + itemTotal;
+
+                var div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = '<div class="item-info"><span class="emoji">🐜</span><div><div class="name">' + item.name + ' <small>' + (item.desc || '') + '</small></div></div></div><div class="item-actions"><div class="qty"><button onclick="changeQty(' + i + ', -1)">−</button><span>' + item.quantity + '</span><button onclick="changeQty(' + i + ', 1)">+</button></div><span class="price">' + itemTotal.toFixed(0) + ' ₴</span><button class="remove" onclick="removeItem(' + i + ')"><i class="fas fa-trash"></i></button></div>';
+                itemsEl.appendChild(div);
+            }
+
+            document.getElementById('cartTotalPrice').textContent = total.toFixed(0) + ' ₴';
+        }
+
+        function changeQty(index, delta) {
+            var cart = getCart();
+            if (cart[index]) {
+                cart[index].quantity = Math.max(1, cart[index].quantity + delta);
+                saveCart(cart);
+            }
+        }
+
+        function removeItem(index) {
+            var cart = getCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+        }
+
+        function checkout() {
+            var cart = getCart();
+            if (cart.length === 0) {
+                return;
+            }
+            alert('Дякуємо за замовлення! 🎉\nНайближчим часом ми зв\'яжемося з вами для підтвердження.');
+            localStorage.removeItem('myrmedon_cart');
+            renderCart();
+            updateCartCount();
+        }
+
+        // Инициализация
+        renderCart();
+
+        // Обработка добавления товара из URL
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var addId = urlParams.get('add');
+            if (addId) {
+                var products = {
+                    '1': { name: 'Camponotus japonicus', price: 429, desc: 'Велика чорна мураха' },
+                    '2': { name: 'Camponotus pseudoirritans', price: 799, desc: 'Червоний черевець' },
+                    '3': { name: 'Ectomomyrmex zhengii', price: 1129, desc: 'Агресивні мисливці' },
+                    '4': { name: 'Messor structor', price: 490, desc: 'Жниварі для початківців' },
+                    '5': { name: 'Camponotus vagus', price: 890, desc: 'Чорні лісові велетні' },
+                    '6': { name: 'Atta cephalotes', price: 2990, desc: 'Мурахи-листорізи' }
+                };
+                var product = products[addId];
+                if (product) {
+                    var cart = getCart();
+                    var existing = null;
+                    for (var k = 0; k < cart.length; k++) {
+                        if (cart[k].id === addId) {
+                            existing = cart[k];
+                            break;
+                        }
+                    }
+                    if (existing) {
+                        existing.quantity = existing.quantity + 1;
+                    } else {
+                        cart.push({ id: addId, name: product.name, price: product.price, desc: product.desc, quantity: 1 });
+                    }
+                    saveCart(cart);
+                    window.history.replaceState({}, '', window.location.pathname);
+                }
+            }
+        };
+    </script>
+
+</body>
+</html>

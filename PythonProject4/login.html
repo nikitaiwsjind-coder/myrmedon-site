@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYRMEDON — Вхід</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&amp;family=Rajdhani:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .auth-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            padding: 40px 0;
+        }
+
+        .auth-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 50px 40px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        .auth-box .logo-center {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-box .logo-center .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--text);
+        }
+        .auth-box .logo-center .brand .primary {
+            color: var(--primary);
+        }
+        .auth-box .logo-center .sub {
+            font-size: 10px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .auth-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .auth-box .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.06);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .auth-box .btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 6px;
+        }
+
+        .auth-box .footer-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .auth-box .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .auth-box .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 20px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .divider .line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .auth-box .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+        .auth-box .social-login a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: 0.3s;
+            font-size: 18px;
+            text-decoration: none;
+        }
+        .auth-box .social-login a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        @media (max-width: 480px) {
+            .auth-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="brand">MYR<span class="primary">MEDON</span></div>
+                <div class="sub"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+            <nav class="nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Головна</a>
+                <a href="catalog.html"><i class="fas fa-store"></i> Каталог</a>
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i> Кошик
+                    <span class="cart-count">0</span>
+                </a>
+                <a href="login.html" class="active"><i class="fas fa-user"></i> Вхід</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container auth-page">
+        <div class="auth-box">
+            <div class="logo-center">
+                <div class="brand">MYR<span class="primary">MEDON</span></div>
+                <div class="sub"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            </div>
+
+            <h2>Ласкаво просимо</h2>
+            <p class="subtitle">Увійдіть у свій аккаунт</p>
+
+            <form onsubmit="event.preventDefault(); alert('Вхід виконано! 🎉');">
+                <div class="form-group">
+                    <label>Електронна пошта</label>
+                    <input type="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Увійти</button>
+            </form>
+
+            <div class="divider">
+                <span class="line"></span>
+                <span>або</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="social-login">
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-apple"></i></a>
+            </div>
+
+            <div class="footer-links">
+                <p>Немає акаунта? <a href="#">Зареєструватися</a></p>
+                <p style="margin-top: 4px;"><a href="#">Забули пароль?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer container">
+        <div>
+            <div class="brand-small">MYR<span class="primary">MEDON</span></div>
+            <div class="sub-small"><span class="primary">✦</span> INSPIRES <span class="primary">✦</span></div>
+            <p style="margin-top: 6px;">© 2026 Всі права захищено</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Головна</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="#">Про нас</a>
+            <a href="#">Доставка</a>
+            <a href="#">Контакти</a>
+        </div>
+        <div class="socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
